@@ -1,5 +1,6 @@
 package com.ysy.ysy_festival_sms.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,15 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.ysy.ysy_festival_sms.R;
+import com.ysy.ysy_festival_sms.activity.ChooseActivity;
 import com.ysy.ysy_festival_sms.bean.Festival;
 import com.ysy.ysy_festival_sms.bean.FestivalLab;
-
-import java.util.Arrays;
 
 /**
  * Created by yeshiyuan on 2015/10/25.
@@ -26,6 +25,7 @@ public class FestivalCateGoryFragment extends Fragment {
     private GridView mGridView;
     private ArrayAdapter<Festival> mAdapter;
     private LayoutInflater mInflater;
+    public final static String FESTIVAL_ID = "festival_id";
 
     @Nullable
     @Override
@@ -53,7 +53,9 @@ public class FestivalCateGoryFragment extends Fragment {
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO
+                Intent intent = new Intent(getActivity(), ChooseActivity.class);
+                intent.putExtra(FESTIVAL_ID, FestivalLab.getInstance().getFestivals().get(position).getId());
+                startActivity(intent);
             }
         });
     }
